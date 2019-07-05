@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>清单列表</title>
+    <link rel="stylesheet" href="./style.css">  
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/e2c8b10e52.js"></script>
+ 
+</head>
+<body>
+        <div class="container">
+            <input type="text" class="txtb" placeholder="增加一个任务">
+            <div class="notcomp">
+                <h3>没有完成的任务</h3>
+
+            </div>
+            <div class="comp">
+                <h3>已经完成的任务</h3>
+
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+        
+            $(".txtb").on("keyup",function(e){
+                if(e.keyCode == 13 &&  $(".txtb").val() !="")
+               {
+                var task = $("<div class='task'></div>").text($(".txtb").val());
+                var del =$("  <i class='fa fa-trash'></i> ").click(function(){
+                    var p =$(this).parent();
+                    p.fadeOut(function(){
+                        p.remove();
+                    });
+                });
+
+                var check =$("  <i class='fa fa-check'></i> ").click(function(){
+                    var p =$(this).parent();
+                    p.fadeOut(function(){
+                       $(".comp").append(p);
+                       p.fadeIn();
+                    });
+                    $(this).remove();
+                });
+
+                task.append(del,check);
+                $(".notcomp").append(task);
+                //clean
+                $(".txtb").val("");
+               }
+            });
+        </script>
+</body>
+</html>
